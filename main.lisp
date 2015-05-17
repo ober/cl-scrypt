@@ -18,33 +18,32 @@
 
 (defun get-key-from-user ()
   (format t "Key Please: ")
-  (read-line))
+  (defvar *mykey* (read-line)))
 
 (defun my-encrypt-file (sfile)
-  (let* ((mykey (get-key-from-user)))
-    (with-open-file
-	(out (format nil "~A.sc" sfile)
-	     :direction :output
-	     :if-does-not-exist :create
-	     :if-exists :supersede
-	     :element-type '(unsigned-byte 8))
-      (cl-scrypt::encrypt-file sfile mykey out))))
-
+  (get-key-from-user)
+  (with-open-file
+      (out (format nil "~A.sc" sfile)
+	   :direction :output
+	   :if-does-not-exist :create
+	   :if-exists :supersede
+	   :element-type '(unsigned-byte 8))
+    (cl-scrypt::encrypt-file sfile *mykey* out))))
 
 (defun my-decrypt-file (sfile)
-  (let* ((mykey (get-key-from-user)))
-    (with-open-file
-	(out (subseq sfile 0 (- (length sfile) 3))
-	     :direction :output
-	     :if-does-not-exist :create
-	     :if-exists :supersede
-	     :element-type '(unsigned-byte 8))
-      (cl-scrypt::decrypt-file sfile mykey out))))
+  (get-key-from-user)
+  (with-open-file
+      (out (subseq sfile 0 (- (length sfile) 3))
+	   :direction :output
+	   :if-does-not-exist :create
+	   :if-exists :supersede
+	   :element-type '(unsigned-byte 8))
+    (cl-scrypt::decrypt-file sfile *mykey* out)))
 
 (defun main ()
   (let* ((args (argv))
 	 (verb (nth 1 args)))
     (cond
-      ((equal "encrypt" verb) (my-encrypt-file nth 2 args))
-      ((equal "decrypt" verb) (my-decrypt-file nth 2 args))
+      ((equal "encrypt" verb) (my-encrypt-file (nth 2 args)))
+      ((equal "decrypt" verb) (my-decrypt-file (nth 2 args)))
       (t (format t "Usage: sc <encrypt|decrypt>" )))))
