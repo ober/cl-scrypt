@@ -17,7 +17,7 @@
   (format t "Usage: ~A <encrypt|decrypt|gen-new-iv> <input file> <passphrase> <output file>~%" app))
 
 (defun get-key-from-user ()
-  (format t "Key Please: ")
+  (format t "Key Please: ~%")
   (defvar *mykey* (read-line)))
 
 (defun my-encrypt-file (sfile)
