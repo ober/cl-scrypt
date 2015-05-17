@@ -28,7 +28,7 @@
 	     :if-does-not-exist :create
 	     :if-exists :supersede
 	     :element-type '(unsigned-byte 8))
-      (cl-scrypt:encrypt-file sfile mykey out))))
+      (cl-scrypt::encrypt-file sfile mykey out))))
 
 
 (defun my-decrypt-file (sfile)
@@ -39,7 +39,7 @@
 	     :if-does-not-exist :create
 	     :if-exists :supersede
 	     :element-type '(unsigned-byte 8))
-      (cl-scrypt:decrypt-file sfile mykey out))))
+      (cl-scrypt::decrypt-file sfile mykey out))))
 
 (defun main ()
   (let* ((args (argv))
