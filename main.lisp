@@ -1,4 +1,4 @@
-(in-package :scrypt)
+(in-package :cl-scrypt)
 
 (defun argv ()
   (or

@@ -4,10 +4,10 @@
 (ql:quickload "trivial-dump-core")
 
 #+sbcl
-(sb-ext:save-lisp-and-die "sc" :compression 9 :executable t :toplevel 'scrypt::main :save-runtime-options t)
+(sb-ext:save-lisp-and-die "sc" :compression 9 :executable t :toplevel 'cl-scrypt::main :save-runtime-options t)
 
 #+(or ccl clisp)
-(trivial-dump-core:save-executable "scrypt" #'scrypt::main)
+(trivial-dump-core:save-executable "scrypt" #'cl-scrypt::main)
 
 #+lispworks
-(deliver 'scrypt::main "scrypt" 1 :multiprocessing t :keep-eval t)
+(deliver 'cl-scrypt::main "sc" 1 :multiprocessing t :keep-eval t)
