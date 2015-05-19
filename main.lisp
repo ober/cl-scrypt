@@ -19,7 +19,7 @@
 ;;(defvar *mykey* "foo")
 
 (defun get-key-cli ()
-  (format t "Key Please: ~%")
+  (format t "Password Please: ~%")
   (read-line))
 
 #+lispworks
