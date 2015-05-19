@@ -14,11 +14,25 @@
    nil))
 
 (defun usage (app)
-  (format t "Usage: ~A <encrypt|decrypt|gen-new-iv> <input file> <passphrase> <output file>~%" app))
+  (format t "Usage: ~A <encrypt|decrypt|gen-new-iv> <input file> <passphrase> <output file>" app))
+
+;;(defvar *mykey* "foo")
+
+(defun get-key-cli ()
+  (format t "Key Please: ~%")
+  (read-line))
+
+#+lispworks
+(defun get-key-gui ()
+  (capi:prompt-for-string "Password Please:"))
+
 
 (defun get-key-from-user ()
-  (format t "Key Please: ~%")
-  (defvar *mykey* (read-line)))
+  #+sbcl
+  (defvar *mykey* (get-key-cli))
+  #+lispworks
+  (defls ld var *mykey* (get-key-gui))
+  )
 
 (defun my-encrypt-file (sfile)
   (get-key-from-user)
