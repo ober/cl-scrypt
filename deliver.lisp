@@ -10,4 +10,4 @@
 (trivial-dump-core:save-executable "scrypt" #'cl-scrypt::main)
 
 #+lispworks
-(deliver 'cl-scrypt::main "sc" 1 :multiprocessing t :keep-eval t)
+(deliver 'cl-scrypt::main "sc" 0 :multiprocessing t :keep-eval t)
