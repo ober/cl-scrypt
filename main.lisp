@@ -56,8 +56,8 @@
 
 (defun main ()
   (let* ((args (argv))
-	 (verb (nth 1 args)))
+	 (verb (nth 0 args)))
     (cond
-      ((equal "encrypt" verb) (my-encrypt-file (nth 2 args)))
-      ((equal "decrypt" verb) (my-decrypt-file (nth 2 args)))
-      (t (format t "Usage: sc <encrypt|decrypt>" )))))
+      ((equal "se" verb) (my-encrypt-file (nth 1 args)))
+      ((equal "sd" verb) (my-decrypt-file (nth 1 args)))
+      (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" )))))
