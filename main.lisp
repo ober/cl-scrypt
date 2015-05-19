@@ -31,7 +31,7 @@
   #+sbcl
   (defvar *mykey* (get-key-cli))
   #+lispworks
-  (defls ld var *mykey* (get-key-gui))
+  (defvar *mykey* (get-key-gui))
   )
 
 (defun my-encrypt-file (sfile)
