@@ -1,5 +1,6 @@
 (in-package :cl-scrypt)
 
+
 (defun argv ()
   (or
    #+clisp (ext:argv)
@@ -26,13 +27,22 @@
 (defun get-key-gui ()
   (capi:prompt-for-string "Password Please:"))
 
+#+sbcl
+(defun get-key-gui ()
+  (with-ltk ()
+    (let* ((text-widget
+	    (make-instance 'text :width 15 :height 2 :name "password"))
+	   (b1 (make-instance 'button
+			      :text "Scrypt IT!"
+			      :command #'(lambda ()
+					   (defvar *mykey* (text text-widget))
+					   (setf *exit-mainloop* t)))))
+      (pack text-widget)
+      (pack b1))))
+
 
 (defun get-key-from-user ()
-  #+sbcl
-  (defvar *mykey* (get-key-cli))
-  #+lispworks
-  (defvar *mykey* (get-key-gui))
-  )
+  (defvar *mykey* (get-key-gui)))
 
 (defun my-encrypt-file (sfile)
   (get-key-from-user)

@@ -1,2 +1,2 @@
 (defpackage :cl-scrypt
-  (:use :cl))
+  (:use :cl :ltk))

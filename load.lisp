@@ -1,6 +1,6 @@
 (load "~/quicklisp/setup.lisp")
 
-(ql:quickload '(:ironclad))
+(ql:quickload '(:ironclad :ltk))
 
 (load "pkgdcl.lisp")
 (load "main.lisp")
