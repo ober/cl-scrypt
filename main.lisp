@@ -45,7 +45,8 @@
   (defvar *mykey* (get-key-gui)))
 
 (defun my-encrypt-file (sfile)
-  (get-key-from-user)
+  ;;(get-key-from-user)
+  (defvar *mykey* "foo")
   (with-open-file
       (out (format nil "~A.sc" sfile)
 	   :direction :output
