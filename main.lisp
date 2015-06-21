@@ -27,7 +27,7 @@
 (defun get-key-gui ()
   (capi:prompt-for-string "Password Please:"))
 
-#+sbcl
+#+(or sbcl allegro)
 (defun get-key-gui ()
   (with-ltk ()
     (let* ((text-widget
@@ -72,3 +72,11 @@
       ((equal "se" verb) (my-encrypt-file (nth 1 args)))
       ((equal "sd" verb) (my-decrypt-file (nth 1 args)))
       (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" )))))
+
+
+(in-package :cl-user)
+(defun main (verb cfile)
+  (cond
+    ((equal "se" verb) (cl-scrypt::my-encrypt-file cfile))
+    ((equal "sd" verb) (cl-scrypt::my-decrypt-file cfile))
+    (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" ))))
