@@ -45,8 +45,8 @@
   (defvar *mykey* (get-key-gui)))
 
 (defun my-encrypt-file (sfile)
-  ;;(get-key-from-user)
-  (defvar *mykey* "foo")
+  (get-key-from-user)
+  ;;(defvar *mykey* "foo")
   (with-open-file
       (out (format nil "~A.sc" sfile)
 	   :direction :output
@@ -76,7 +76,8 @@
 
 (in-package :cl-user)
 (defun main (verb cfile)
-  (cond
-    ((equal "se" verb) (cl-scrypt::my-encrypt-file cfile))
-    ((equal "sd" verb) (cl-scrypt::my-decrypt-file cfile))
-    (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" ))))
+  (let ((base (file-namestring verb)))
+    (cond
+      ((equal "se" base) (cl-scrypt::my-encrypt-file cfile))
+      ((equal "sd" base) (cl-scrypt::my-decrypt-file cfile))
+      (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" )))))
