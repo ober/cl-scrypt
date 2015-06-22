@@ -17,4 +17,4 @@
 (progn
   (let ((lfiles '("pkgdcl.lisp" "main.lisp" "cl-scrypt.lisp")))
     (mapcar #'compile-file lfiles)
-    (generate-executable "sc-al" '("pkgdcl.fasl" "main.fasl" "cl-scrypt.fasl"))))
+    (generate-executable "sc" '("pkgdcl.fasl" "main.fasl" "cl-scrypt.fasl"))))
