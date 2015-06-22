@@ -1,2 +1,0 @@
-dd if=/dev/zero of=./fifty bs=1M count=50
-cat run.lisp|alisp
