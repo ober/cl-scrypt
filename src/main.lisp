@@ -1,6 +1,5 @@
 (in-package :cl-scrypt)
 
-
 (defun argv ()
   (or
    #+clisp (ext:argv)
@@ -13,9 +12,6 @@
    #+allegro (sys:command-line-arguments)
    #+lispworks sys:*line-arguments-list*
    nil))
-
-(defun usage (app)
-  (format t "Usage: ~A <encrypt|decrypt|gen-new-iv> <input file> <passphrase> <output file>" app))
 
 ;;(defvar *mykey* "foo")
 
@@ -39,7 +35,6 @@
 					   (setf *exit-mainloop* t)))))
       (pack text-widget)
       (pack b1))))
-
 
 (defun get-key-from-user ()
   (defvar *mykey* (get-key-gui)))
@@ -65,19 +60,29 @@
 	   :element-type '(unsigned-byte 8))
     (cl-scrypt::decrypt-file sfile *mykey* out)))
 
+#-allegro
 (defun main ()
   (let* ((args (argv))
-	 (verb (nth 0 args)))
+         (bin (nth 0 args))
+         (verb (nth 1 args))
+         (file (nth 2 args)))
+    (format t "argv: ~a~%" args)
     (cond
-      ((equal "se" verb) (my-encrypt-file (nth 1 args)))
-      ((equal "sd" verb) (my-decrypt-file (nth 1 args)))
-      (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" )))))
+      ((equal "-e" verb) (my-encrypt-file file))
+      ((equal "-d" verb) (my-decrypt-file file))
+      (t (usage)))))
 
+(defun usage ()
+  (format t "Usage: scrypt -[ed] file~%")
+  (format t "Encrypt file: scrypt -e file~%")
+  (format t "Decrypt file: scrypt -d file~%"))
 
+#+allegro
 (in-package :cl-user)
-(defun main (verb cfile)
-  (let ((base (file-namestring verb)))
-    (cond
-      ((equal "se" base) (cl-scrypt::my-encrypt-file cfile))
-      ((equal "sd" base) (cl-scrypt::my-decrypt-file cfile))
-      (t (format t "Usage: s[de] file~%se: encrypts file~%sd: decrypts file" )))))
+
+#+allegro
+(defun main (bin verb cfile)
+  (cond
+    ((equal "-e" verb) (cl-scrypt::my-encrypt-file cfile))
+    ((equal "-d" verb) (cl-scrypt::my-decrypt-file cfile))
+    (t (cl-scrypt:usage))))
