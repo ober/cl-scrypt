@@ -7,7 +7,6 @@
   :author "Chris Howey <chris@howey.me>"
   :license "BSD License"
   :serial t
-  :depends-on (#:ironclad)
+  :depends-on (#:ironclad #:uiop)
   :components ((:file "package")
                (:file "cl-scrypt")))
-

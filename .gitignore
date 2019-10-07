@@ -1,0 +1,4 @@
+dist
+*.fasl
+scrypt
+autoloads.out

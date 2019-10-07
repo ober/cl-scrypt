@@ -14,14 +14,14 @@ ecl:
 
 sbcl:
 	@ mkdir -p dist/sbcl
-	@ cat src/deliver.lisp|sbcl --control-stack-size 2048 --dynamic-space-size 20480  2>&1 > /dev/null #--control-stack-size 2048  #--disable-debugger
+	@ cd src && cat deliver.lisp|sbcl --control-stack-size 2048 --dynamic-space-size 20480  2>&1 > /dev/null #--control-stack-size 2048  #--disable-debugger
 ccl:
 	@ mkdir -p dist/ccl || true
 	@ cd src && cat deliver.lisp|ccl64
 
 clisp:
 	@ mkdir -p dist/clisp || true
-	@ cat deliver.lisp|clisp
+	@ cd src && cat deliver.lisp|clisp
 
 allegro:
 	@ rm -rf dist/allegro scrypt
